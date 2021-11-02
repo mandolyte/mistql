@@ -784,24 +784,24 @@ describe("builtins", () => {
     });
   });
 
-  describe("#join", () => {
-    it("joins basic arrays", () => {
+  describe("#concat", () => {
+    it("concats basic arrays", () => {
       assert.deepStrictEqual(
-        execute(parseOrThrow('join "" @'), ["bo", "ba"]),
+        execute(parseOrThrow('concat "" @'), ["bo", "ba"]),
         "boba"
       );
     });
 
-    it("joins with a delimiter", () => {
+    it("concats with a delimiter", () => {
       assert.deepStrictEqual(
-        execute(parseOrThrow('join ", " @'), ["bo", "ba"]),
+        execute(parseOrThrow('concat ", " @'), ["bo", "ba"]),
         "bo, ba"
       );
     });
 
     it("round-trips with split", () => {
       assert.deepStrictEqual(
-        execute(parseOrThrow('(split ":" @ | join ":") == @'), "hello:hi:sup"),
+        execute(parseOrThrow('(split ":" @ | concat ":") == @'), "hello:hi:sup"),
         true
       );
     });

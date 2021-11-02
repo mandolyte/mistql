@@ -2,6 +2,7 @@ import { compare, truthy } from "../runtimeValues";
 import { BuiltinFunction } from "../types";
 import { arity, validateType } from "../util";
 import apply from "./apply";
+import concat from './concat';
 import count from "./count";
 import entries from "./entries";
 import equal from "./equal";
@@ -13,7 +14,6 @@ import float from "./float";
 import fromentries from "./fromentries";
 import groupby from "./groupby";
 import indexFn from "./indexFn";
-import join from "./join";
 import keys from "./keys";
 import log from "./log";
 import map from "./map";
@@ -105,6 +105,11 @@ const matchBinaryOp: BuiltinFunction = arity(2, (args, stack, exec) =>
   match(args.slice().reverse(), stack, exec)
 );
 
+const join: BuiltinFunction = (args, stack, exec) => {
+  console.warn(`MistQL: Join is deprecated in favor of concat. Future use may diverge.`);
+  return concat(args, stack, exec);
+};
+
 export default {
   apply,
   count,
@@ -119,6 +124,7 @@ export default {
   if: ifFunction,
   index: indexFn,
   join,
+  concat,
   keys,
   log,
   match,
